@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spickzettel Physik: Mechanik</title>
+<style>
+  /* Genau 1 Seite A4, zweispaltig. Prüfen: tools/druck_check.sh */
+  @page { size: A4; margin: 8mm 9mm; }
+  * { box-sizing: border-box; }
+  body { font-family: "Helvetica Neue", Arial, sans-serif; color: #1a1a1a; font-size: 8.9pt; line-height: 1.3; margin: 0; }
+  .kopf { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2.5px solid #1d4ed8; padding-bottom: 1.2mm; margin-bottom: 1.8mm; }
+  .kopf h1 { font-size: 14pt; color: #1d4ed8; margin: 0; }
+  .kopf .meta { font-size: 8pt; color: #555; text-align: right; }
+  .intro { font-size: 8pt; color: #555; margin: 0 0 2mm; }
+  .cols { column-count: 2; column-gap: 5mm; }
+  .thema { break-inside: avoid; margin-bottom: 2.2mm; }
+  h2 { font-size: 9.8pt; color: #1d4ed8; margin: 0 0 1mm; border-bottom: 1.1px solid #1d4ed8; padding-bottom: 0.4mm; }
+  .box { border: 0.6px solid #ccc; border-radius: 3px; padding: 1mm 1.6mm; margin: 0 0 1mm; }
+  .regel { background: #f3f6ff; border-color: #c3d3f7; }
+  .falle { background: #fef2f2; border-color: #f3b4b4; }
+  .formel { font-weight: 700; text-align: center; background: #fff; border: 0.8px dashed #1d4ed8; border-radius: 3px; padding: 0.8mm; margin: 0 0 1mm; }
+  table { width: 100%; border-collapse: collapse; font-size: 8.3pt; margin-bottom: 1mm; }
+  th, td { border: 0.5px solid #bbb; padding: 0.6mm 1.2mm; text-align: left; vertical-align: top; }
+  th { background: #eef2fb; }
+  .fuss { margin-top: 1.5mm; font-size: 7pt; color: #999; text-align: center; }
+  @media screen { body { max-width: 210mm; margin: 0 auto; padding: 10mm; } }
+</style>
+</head>
+<body>
+<div class="kopf">
+  <h1>Spickzettel Physik: Mechanik</h1>
+  <div class="meta">Klasse 8 · Kräfte · Reibung · Rollen · Flaschenzug</div>
+</div>
+<p class="intro">Am Abend vor der Arbeit: lesen, zudecken, aufsagen. Nichts Neues mehr. Drucken: Teilen → Drucken (iPad) bzw. Cmd + P.</p>
+
+<div class="cols">
+  <div class="thema">
+    <h2>1 · Kräfte und ihre Wirkung</h2>
+    <div class="box regel">Kraft sieht man nicht, man erkennt sie an der <b>Wirkung</b>:<br>
+      <b>verformen</b>: plastisch (bleibt, Knete) · elastisch (geht zurück, Schwamm)<br>
+      <b>Bewegung ändern</b>: beschleunigen · abbremsen · Richtung ändern</div>
+    <div class="box falle"><b>Falle:</b> Eine Kraft ändert nie die Masse.</div>
+  </div>
+
+  <div class="thema">
+    <h2>2 · Kraftpfeil</h2>
+    <div class="box regel">Anfang = <b>Angriffspunkt</b> · Spitze = <b>Richtung</b> · Länge = <b>Größe</b></div>
+    <div class="formel">Pfeillänge = Kraft : Maßstab</div>
+    <div class="box">Beispiel: 6 N, Maßstab 1 cm ≙ 2 N → 6 : 2 = 3 cm</div>
+    <div class="box falle"><b>Falle:</b> Maßstab immer dazuschreiben. Pfeil beginnt am Körper.</div>
+  </div>
+
+  <div class="thema">
+    <h2>3 · Zwei Kräfte</h2>
+    <table>
+      <tr><td>gleich lang, entgegengesetzt</td><td>heben sich auf → Körper <b>bleibt in Ruhe</b></td></tr>
+      <tr><td>ungleich, entgegengesetzt</td><td><b>Resultierende = groß − klein</b>, bewegt sich in ihre Richtung</td></tr>
+      <tr><td>gleiche Richtung</td><td>Resultierende = Kraft 1 + Kraft 2</td></tr>
+    </table>
+    <div class="box falle"><b>Falle:</b> Gegeneinander wird <b>abgezogen</b>. Richtung dazuschreiben!</div>
+  </div>
+
+  <div class="thema">
+    <h2>4 · Kräfte messen</h2>
+    <div class="box regel"><b>Federkraftmesser</b>: je größer die Kraft, desto länger die Feder. Einheit <b>Newton (N)</b>.<br>
+      Regeln: passender Messbereich · Nullpunkt prüfen · in Kraftrichtung halten · auf Augenhöhe ablesen</div>
+    <div class="box falle"><b>Falle:</b> Erst schauen, was ein kleiner Strich wert ist (10-N-Messer: 0,5 N, 1-N-Messer: 0,05 N).</div>
+  </div>
+
+  <div class="thema">
+    <h2>5 · Masse und Gewichtskraft</h2>
+    <table>
+      <tr><th></th><th>Masse m</th><th>Gewichtskraft G</th></tr>
+      <tr><td>Einheit</td><td>kg</td><td>N</td></tr>
+      <tr><td>vom Ort abhängig?</td><td>nein</td><td>ja</td></tr>
+    </table>
+    <div class="formel">Erde: 1 kg ≙ 10 N · Mond: ein Sechstel</div>
+    <div class="box">Beispiel: 60 kg → 600 N (Erde) → 100 N (Mond). Gravitation: alle Körper ziehen sich an.</div>
+  </div>
+
+  <div class="thema">
+    <h2>6 · Reibung</h2>
+    <div class="formel">Haftreibung &gt; Gleitreibung &gt; Rollreibung</div>
+    <div class="box regel">Haft: liegt still (losreißen) · Gleit: rutscht · Roll: rollt<br>
+      <b>mehr Gewicht → mehr Reibung</b> · <b>rauer → mehr Reibung</b><br>
+      <b>Auflagefläche: kein Einfluss!</b></div>
+    <div class="box">Ohne Reibung keine Fortbewegung (wie auf Eis). Mehr Reibung: Profil, Streusand. Weniger: Öl, Räder.</div>
+  </div>
+
+  <div class="thema">
+    <h2>7 · Feste und lose Rolle</h2>
+    <table>
+      <tr><th></th><th>feste Rolle</th><th>lose Rolle</th></tr>
+      <tr><td>bewirkt</td><td>Richtungsänderung</td><td>halbe Kraft</td></tr>
+      <tr><td>Kraft</td><td>F<sub>Z</sub> = F<sub>L</sub></td><td>F<sub>Z</sub> = ½ F<sub>L</sub></td></tr>
+      <tr><td>Weg</td><td>s<sub>Z</sub> = s<sub>L</sub></td><td>s<sub>Z</sub> = 2 · s<sub>L</sub></td></tr>
+      <tr><td>Nachteil</td><td>spart keine Kraft</td><td>doppelt so viel Seil</td></tr>
+    </table>
+  </div>
+
+  <div class="thema">
+    <h2>8 · Flaschenzug</h2>
+    <div class="box regel">feste + lose Rollen. <b>n = tragende Seilstücke</b> (nicht Rollen zählen!)</div>
+    <div class="formel">F<sub>Z</sub> = F<sub>L</sub> : n &nbsp;&nbsp; s<sub>Z</sub> = s<sub>L</sub> · n</div>
+    <div class="box">2 lose Rollen → n = 4 → ¼ Kraft, 4-facher Weg<br>3 lose Rollen → n = 6 → ⅙ Kraft, 6-facher Weg</div>
+    <div class="box falle"><b>Goldene Regel:</b> Was man an Kraft spart, muss man an Weg zusetzen.</div>
+  </div>
+</div>
+<p class="fuss">Eigene Zusammenfassung nach Leonies Heft, keine Buchseiten.</p>
+</body>
+</html>

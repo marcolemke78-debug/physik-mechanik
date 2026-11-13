@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Probe-Arbeit Physik: Mechanik</title>
+<link rel="stylesheet" href="druck.css">
+<style>
+  ol.aufgaben { padding-left: 0; list-style: none; counter-reset: a; margin: 0; }
+  ol.aufgaben > li { counter-increment: a; margin-bottom: 4mm; break-inside: avoid; }
+  ol.aufgaben > li > .frage > span:first-child::before { content: counter(a) ". "; font-weight: 700; }
+  .frage { display: flex; justify-content: space-between; gap: 4mm; }
+  .p { white-space: nowrap; font-size: 9pt; color: #555; }
+  .teil { margin: 1.5mm 0 0 5mm; }
+  .zeile { height: 8mm; }
+  .skalen { display: flex; gap: 6mm; margin: 1mm 0 0 5mm; }
+  .skalen > div { flex: 1; font-size: 9.5pt; }
+  .kaestchenfeld { height: 22mm; margin: 1.5mm 0 0 5mm; background-image: linear-gradient(#ddd 1px, transparent 1px), linear-gradient(90deg, #ddd 1px, transparent 1px); background-size: 5mm 5mm; border: 1px solid #ccc; }
+  .loesung li { margin-bottom: 2mm; }
+  .raster td:first-child { width: 40mm; font-weight: 600; }
+</style>
+</head>
+<body>
+<!--
+  Probe-Arbeit: alle Themen aus dem Heft, 45 Minuten.
+  Punkte in data-p, Summe automatisch. Keine Zahl stammt aus einem App-Beispiel oder einer App-Übung.
+  Nachgerechnet in pruefung/nachrechnen.js (Abschnitt PROBE).
+-->
+<div class="kopf"><h1>Probe-Arbeit Physik</h1><div class="meta"><span class="ka-titel"></span><br>Zeit: <strong>45 Minuten</strong> · Punkte: ____ / <span class="summe"></span></div></div>
+<p class="intro">Name: ______________________ · Mit Uhr, ohne Heft, ohne App. Erst ganz am Ende die Lösungen anschauen. Rechnungen immer mit Einheit.</p>
+
+<ol class="aufgaben">
+  <li data-p="4">
+    <div class="frage"><span>Welche Wirkung hat die Kraft? Schreib sie hinter jede Situation.</span><span class="p"></span></div>
+    <div class="teil">a) Aus Ton wird eine Schale geformt: __________________________</div>
+    <div class="teil">b) Ein Bus fährt an der Haltestelle los: _________________________</div>
+    <div class="teil">c) Ein Fallschirm bremst den Springer: _________________________</div>
+    <div class="teil">d) Ein Gummiball prallt von der Wand ab und ist danach wieder rund: ___________________</div>
+  </li>
+  <li data-p="3">
+    <div class="frage"><span>Ein Kind zieht einen Schlitten mit 24 N nach rechts. Maßstab: 1 cm ≙ 8 N. Berechne die Länge des Kraftpfeils und zeichne ihn ein (Angriffspunkt: der Punkt).</span><span class="p"></span></div>
+    <div class="kaestchenfeld"></div>
+  </li>
+  <li data-p="3">
+    <div class="frage"><span>Beim Tauziehen zieht Team Blau mit 420 N nach links, Team Rot mit 380 N nach rechts. Berechne die resultierende Kraft. Wer gewinnt?</span><span class="p"></span></div>
+    <div class="zeile"></div><div class="zeile"></div>
+  </li>
+  <li data-p="2">
+    <div class="frage"><span>Lies beide Kraftmesser ab.</span><span class="p"></span></div>
+    <div class="skalen"><div>a) Messbereich 10 N<span id="skala1"></span>Anzeige: ______ N</div><div>b) Messbereich 1 N<span id="skala2"></span>Anzeige: ______ N</div></div>
+  </li>
+  <li data-p="2">
+    <div class="frage"><span>Nenne zwei Regeln für den richtigen Umgang mit dem Kraftmesser.</span><span class="p"></span></div>
+    <div class="zeile"></div><div class="zeile"></div>
+  </li>
+  <li data-p="3">
+    <div class="frage"><span>Eine Astronautin hat eine Masse von 54 kg. a) Wie groß ist ihre Gewichtskraft auf der Erde? b) Wie groß ist sie auf dem Mond? c) Welche Masse hat sie auf dem Mond?</span><span class="p"></span></div>
+    <div class="zeile"></div><div class="zeile"></div>
+  </li>
+  <li data-p="5">
+    <div class="frage"><span>Reibung</span><span class="p"></span></div>
+    <div class="teil">a) Ordne die Reibungsarten nach der Größe, die größte zuerst. (1 P.)<div class="zeile"></div></div>
+    <div class="teil">b) Warum streut man im Winter Sand auf Gehwege? (2 P.)<div class="zeile"></div></div>
+    <div class="teil">c) Ein Holzklotz wird hochkant statt flach über den Tisch gezogen. Ändert sich die Reibungskraft? Begründe. (2 P.)<div class="zeile"></div><div class="zeile"></div></div>
+  </li>
+  <li data-p="3">
+    <div class="frage"><span>Ein Dachdecker hebt mit einer <strong>losen</strong> Rolle einen Eimer (Lastkraft 70 N) um 50 cm. a) Wie groß ist die Zugkraft? b) Wie viel Seil zieht er? c) Nenne einen Nachteil der losen Rolle.</span><span class="p"></span></div>
+    <div class="zeile"></div><div class="zeile"></div>
+  </li>
+  <li data-p="3">
+    <div class="frage"><span>Ein Flaschenzug hat 2 lose Rollen. Die Last wiegt 480 N. a) Wie viele tragende Seilstücke hat er? b) Wie groß ist die Zugkraft? c) Die Last soll 3 m hoch. Wie viel Seil musst du ziehen?</span><span class="p"></span></div>
+    <div class="zeile"></div><div class="zeile"></div>
+  </li>
+  <li data-p="2">
+    <div class="frage"><span>Finde den Fehler: Kim sagt: „Mit einer festen Rolle brauche ich nur die halbe Kraft.“ Stimmt das? Begründe.</span><span class="p"></span></div>
+    <div class="zeile"></div><div class="zeile"></div>
+  </li>
+</ol>
+
+<div class="seitenumbruch"></div>
+<div class="kopf"><h1>Lösungen</h1><div class="meta">Erst nach der Probe-Arbeit anschauen!</div></div>
+<ol class="loesung">
+  <li>a) plastische Verformung · b) beschleunigen · c) abbremsen · d) Richtung ändern (und elastische Verformung). Je 1 P.</li>
+  <li>24 N : 8 N = <strong>3 cm</strong> (2 P.), Pfeil vom Punkt aus 3 cm nach rechts, beschriftet mit F = 24 N (1 P.).</li>
+  <li>Entgegengesetzt → abziehen: 420 N − 380 N = <strong>40 N nach links</strong> (2 P.). Team Blau gewinnt (1 P.).</li>
+  <li>a) <strong>6,5 N</strong> · b) <strong>0,35 N</strong>. Je 1 P.</li>
+  <li>Je 1 P. für zwei von: passenden Messbereich wählen · Nullpunkt prüfen · in Kraftrichtung halten · auf Augenhöhe ablesen.</li>
+  <li>a) 54 kg · 10 = <strong>540 N</strong> · b) 540 N : 6 = <strong>90 N</strong> · c) <strong>54 kg</strong>, die Masse ist überall gleich. Je 1 P.</li>
+  <li>a) Haftreibung &gt; Gleitreibung &gt; Rollreibung (1 P.) · b) Sand macht den Boden rauer, die Reibung wird größer, man rutscht nicht so leicht (2 P.) · c) Nein (1 P.), die Auflagefläche hat keinen Einfluss, das Gewicht bleibt gleich (1 P.).</li>
+  <li>a) 70 N : 2 = <strong>35 N</strong> · b) 2 · 50 cm = <strong>100 cm</strong> (1 m) · c) Man muss doppelt so viel Seil ziehen (oder: man zieht nach oben). Je 1 P.</li>
+  <li>a) n = <strong>4</strong> · b) 480 N : 4 = <strong>120 N</strong> · c) 3 m · 4 = <strong>12 m</strong>. Je 1 P.</li>
+  <li>Nein (1 P.). Die feste Rolle ändert nur die Richtung, die Zugkraft ist genauso groß wie die Lastkraft. Die halbe Kraft gibt es bei der losen Rolle (1 P.).</li>
+</ol>
+
+<h2>So wertest du aus</h2>
+<table class="raster">
+  <tr><td>ab 85 % der Punkte</td><td>Sitzt. Nur noch Spickzettel und „Heute dran“.</td></tr>
+  <tr><td>60 bis 84 %</td><td>Fast. Jeden Fehler in der App nachschlagen und eine Übung dazu machen.</td></tr>
+  <tr><td>unter 60 %</td><td>Die Themen mit Fehlern noch einmal in der App, dann Gemischt üben.</td></tr>
+</table>
+<p class="fuss">Eigene Aufgaben nach Leonies Heft, keine Buchseiten.</p>
+
+<script src="../js/ka-daten.js"></script>
+<script src="../js/exercises.js"></script>
+<script src="../js/sims.js"></script>
+<script>
+  let sum = 0;
+  document.querySelectorAll('ol.aufgaben > li').forEach(li => {
+    const p = Number(li.dataset.p);
+    sum += p;
+    li.querySelector('.p').textContent = '___ / ' + p + ' P.';
+  });
+  document.querySelector('.summe').textContent = sum;
+  document.querySelector('.ka-titel').textContent = KA.title;
+  document.getElementById('skala1').innerHTML = Sims.skala(10, 6.5);
+  document.getElementById('skala2').innerHTML = Sims.skala(1, 0.35);
+</script>
+</body>
+</html>

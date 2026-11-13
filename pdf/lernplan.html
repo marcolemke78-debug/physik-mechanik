@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lernplan</title>
+<link rel="stylesheet" href="druck.css">
+<style>
+  td.tag { white-space: nowrap; width: 30mm; font-weight: 600; }
+  td.min { white-space: nowrap; width: 15mm; color: #555; }
+  td.k { width: 9mm; text-align: center; }
+  tr.ka td { background: #eff6ff; font-weight: 700; }
+</style>
+</head>
+<body>
+<!-- Füllt sich selbst aus js/ka-daten.js (KA-Datum, Themen, Lektionen). Nichts von Hand eintragen. -->
+<div class="kopf"><h1>Mein Lernplan</h1><div class="meta" id="meta"></div></div>
+<p class="intro">Jeden Tag 15 bis 20 Minuten. Abhaken, wenn erledigt. Fang jeden Tag mit <strong>„Heute dran“</strong> auf der Startseite der App an.</p>
+<table>
+  <thead><tr><th></th><th>Wann</th><th>Was</th><th>Zeit</th></tr></thead>
+  <tbody id="plan"></tbody>
+</table>
+<div class="box box-tip" id="hinweis" style="display:none"></div>
+<p class="fuss">Lieber jeden Tag ein kleines Stück als alles am letzten Abend.</p>
+
+<script src="../js/ka-daten.js"></script>
+<script>
+  // Datum-Hilfen (YYYY-MM-DD, ohne Uhrzeit)
+  function fmt(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+  function add(s, n) { const d = new Date(s + 'T00:00:00'); d.setDate(d.getDate() + n); return fmt(d); }
+  function lang(s) { return new Date(s + 'T00:00:00').toLocaleDateString('de-DE', { weekday: 'short', day: 'numeric', month: 'numeric' }); }
+
+  const today = fmt(new Date());
+  const ka = KA.date;
+  if (!ka) {
+    document.getElementById('plan').innerHTML = '<tr><td colspan="4">Das KA-Datum fehlt noch (js/ka-daten.js). Ohne Datum gibt es keinen Plan.</td></tr>';
+    throw new Error('KA.date fehlt');
+  }
+  const rows = [];   // { date, text, min }
+  const row = (date, text, min) => { if (date >= today || date === ka) rows.push({ date, text, min }); };
+
+  // Lektionen auf die Lerntage verteilen: Tag -13 bis -8, wer spät startet, bekommt mehr pro Tag
+  let first = add(ka, -13) < today ? today : add(ka, -13);
+  let last = add(ka, -8);
+  if (last < first) last = add(ka, -4);           // sehr spät gestartet: Lektionen bis Tag -4
+  if (last < first) last = first;                 // weniger als 4 Tage: alle Lektionen heute, vor der Probe-Arbeit
+  const lessonDays = [];
+  if (first < ka) for (let d = first; d <= last; d = add(d, 1)) lessonDays.push(d);   // am KA-Tag nichts Neues
+  const perDay = Math.max(1, Math.ceil(LESSONS.length / Math.max(1, lessonDays.length)));
+  const lessonText = {};
+  LESSONS.forEach((l, i) => {
+    const d = lessonDays[Math.min(Math.floor(i / perDay), lessonDays.length - 1)];
+    if (d) (lessonText[d] = lessonText[d] || []).push(l.title);
+  });
+
+  row(add(ka, -14), 'Startseite &bdquo;Das kommt dran&ldquo;: Themenliste lesen, Ampel ehrlich setzen. Diesen Plan aufhängen.', '10');
+  for (let d = add(ka, -13); d <= add(ka, -4); d = add(d, 1)) {
+    if (lessonText[d]) row(d, '&bdquo;Heute dran&ldquo;, dann neu: ' + lessonText[d].join(' + '), '20');
+    else if (d === add(ka, -7)) row(d, 'Trainer: alle Karten einmal ganz durch. Was nicht sitzt, kommt morgen wieder', '20');
+    else if (d >= add(ka, -6)) row(d, '&bdquo;Heute dran&ldquo;, dann Gemischt üben. Rote Themen noch einmal in der App', '20');
+    else row(d, '&bdquo;Heute dran&ldquo; und Trainer', '15');
+  }
+  // Lektionstage nach Tag -4 (KA in wenigen Tagen) zusätzlich aufnehmen
+  Object.keys(lessonText).filter(d => d > add(ka, -4)).forEach(d => row(d, 'Zuerst neu: ' + lessonText[d].join(' + '), '30'));
+  row(add(ka, -3), 'Probe-Arbeit auf Papier: mit Uhr, ohne Hilfe. Danach selbst korrigieren', '45');
+  row(add(ka, -2), 'Fehler aus der Probe-Arbeit klären. Zu jedem Fehler eine neue Aufgabe in der App', '20');
+  row(add(ka, -1), 'Spickzettel lesen, zudecken, aufsagen. &bdquo;Heute dran&ldquo;. Nichts Neues. Früh schlafen', '15');
+  row(ka, 'Klassenarbeit! Morgens den Spickzettel einmal überfliegen', '5');
+
+  document.getElementById('meta').textContent = KA.title + ' · ' + new Date(ka + 'T00:00:00').toLocaleDateString('de-DE', { weekday: 'long', day: 'numeric', month: 'long' });
+  rows.sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
+  document.getElementById('plan').innerHTML = rows.map(r =>
+    '<tr' + (r.date === ka ? ' class="ka"' : '') + '><td class="k"><span class="kaestchen"></span></td><td class="tag">' + lang(r.date) + '</td><td>' + r.text + '</td><td class="min">' + r.min + ' Min.</td></tr>'
+  ).join('');
+  if (add(ka, -14) < today) {
+    const h = document.getElementById('hinweis');
+    h.style.display = '';
+    h.innerHTML = 'Du startest später als 14 Tage vorher. Der Plan beginnt deshalb heute' + (perDay > 1 ? ' und hat bis zu ' + perDay + ' Lektionen pro Tag' : '') + '. Wichtig bleibt: Probe-Arbeit 3 Tage vorher, am Abend davor nichts Neues.';
+  }
+</script>
+</body>
+</html>
