@@ -183,7 +183,7 @@ window.LESSON_DATA = (window.LESSON_DATA || []).concat([
         <p>Wir schauen auf einen Körper, der zuerst <strong>ruhig liegt</strong>. Je nachdem, welche Kräfte auf ihn wirken, passiert Folgendes (Heft 1.3):</p>
         <table class="info-table">
           <tr><th>Fall</th><th>Was passiert?</th></tr>
-          <tr><td>Gleich lang, <strong>entgegengesetzt</strong></td><td>Die Kräfte <strong>heben sich auf</strong>. Der Körper bleibt in Ruhe, er bewegt sich nicht. <span class="klein">Beispiel: Ein Ball liegt auf dem Tisch. Die Gewichtskraft zieht nach unten, der Tisch drückt genauso stark nach oben.</span></td></tr>
+          <tr><td>Gleich lang, <strong>entgegengesetzt</strong></td><td>Die Kräfte <strong>heben sich auf</strong>. Der Körper bleibt in Ruhe, er bewegt sich nicht. <span class="klein">Beispiel: Ein Ball liegt auf dem Tisch. Die Gewichtskraft zieht nach unten, der Tisch drückt mit einer <strong>Gegenkraft</strong> genauso stark nach oben.</span></td></tr>
           <tr><td>Nur <strong>ein</strong> Pfeil</td><td>Der Körper setzt sich in Richtung des Pfeils in Bewegung. <span class="klein">Beispiel: Du lässt den Ball los, er fällt nach unten.</span></td></tr>
           <tr><td>Nicht gleich lang, entgegengesetzt</td><td>Man zieht die kleinere von der größeren Kraft ab. Das Ergebnis heißt <strong>resultierende Kraft</strong> (die Resultierende). Der Körper bewegt sich in ihre Richtung. <span class="klein">Beispiel: Deine Hand hebt eine Kugel. Die Muskelkraft ist größer als die Gewichtskraft, also geht die Kugel nach oben.</span></td></tr>
           <tr><td>Zwei Kräfte in die <strong>gleiche</strong> Richtung</td><td>Die Kräfte werden <strong>addiert</strong>. <span class="klein">Beispiel: Zwei Personen schieben ein Auto gemeinsam an.</span></td></tr>
@@ -218,8 +218,8 @@ window.LESSON_DATA = (window.LESSON_DATA || []).concat([
       {
         type: 'multiple-choice',
         question: 'Ein Buch liegt ruhig auf dem Tisch. Warum bewegt es sich nicht?',
-        explanation: 'Die Gewichtskraft zieht das Buch nach unten, der Tisch drückt genauso stark nach oben. Gleich lang und entgegengesetzt: Die Kräfte heben sich auf.',
-        options: ['Der Tisch drückt gleich stark nach oben', 'Auf das Buch wirkt keine Kraft', 'Die Gewichtskraft des Buches zeigt nach oben', 'Das Buch hat keine Masse'],
+        explanation: 'Die Gewichtskraft zieht das Buch nach unten, der Tisch drückt mit einer Gegenkraft genauso stark nach oben. Gleich lang und entgegengesetzt: Die Kräfte heben sich auf.',
+        options: ['Der Tisch drückt mit gleich starker Gegenkraft nach oben', 'Auf das Buch wirkt keine Kraft', 'Die Gewichtskraft des Buches zeigt nach oben', 'Das Buch hat keine Masse'],
         correct: 0,
         wrongExplanations: {
           1: 'Doch: Die Gewichtskraft zieht das Buch immer nach unten. Sie wird nur ausgeglichen.',
