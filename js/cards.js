@@ -1,5 +1,5 @@
 /**
- * Karten für den Trainer: Begriffe, Einheiten, Formeln aus Leonies Heft (Mechanik).
+ * Karten für den Trainer: Begriffe, Einheiten, Formeln aus Leonies Heft (Mechanik und Elektromagnetismus).
  * id fest, nie ändern (Lernstand hängt daran). mode 'type' = tippen, 'reveal' = aufdecken.
  * formula: true = Leerzeichen und gleichwertige Rechenzeichen (· * x, : /) werden beim Vergleich ignoriert.
  */
@@ -37,6 +37,13 @@ const CARDS = {
     { id: 'p20', front: 'Die 4 Regeln beim Kraftmesser', back: 'Passenden Messbereich wählen, Nullpunkt prüfen, in Kraftrichtung halten, auf Augenhöhe ablesen.', mode: 'reveal' },
     { id: 'p21', front: 'Wovon hängt die Reibung ab, wovon nicht?', back: 'Sie hängt vom Gewicht ab (mehr Gewicht, mehr Reibung) und vom Material (rau, mehr Reibung). Nicht von der Größe der Auflagefläche.', mode: 'reveal' },
     { id: 'p22', front: 'Feste und lose Rolle: was bewirkt welche?', back: 'Feste Rolle ändert die Richtung (F<sub>Z</sub> = F<sub>L</sub>). Lose Rolle halbiert die Kraft, dafür doppelter Seilweg.', mode: 'reveal' },
-    { id: 'p23', front: 'Goldene Regel der Mechanik', back: 'Was man an Kraft spart, muss man an Weg zusetzen.', mode: 'reveal' }
+    { id: 'p23', front: 'Goldene Regel der Mechanik', back: 'Was man an Kraft spart, muss man an Weg zusetzen.', mode: 'reveal' },
+    // Elektromagnetismus
+    { id: 'p24', front: 'Fließt Strom durch einen Leiter, entsteht ein …', back: 'Magnetfeld', alt: ['ein Magnetfeld', 'magnetisches Feld'] },
+    { id: 'p25', front: 'Ein aufgewickelter Leiter heißt …', back: 'Spule', alt: ['eine Spule'] },
+    { id: 'p26', front: 'Eine stromdurchflossene Spule heißt …', back: 'Elektromagnet', alt: ['ein Elektromagnet'] },
+    { id: 'p27', front: 'Kern, der das Magnetfeld einer Spule verstärkt', back: 'Eisenkern', alt: ['Eisen'] },
+    { id: 'p28', front: 'Drei Wege, das Magnetfeld eines Elektromagneten zu verstärken', back: 'Eisenkern hineinstecken, höhere Stromstärke, mehr Windungen.', mode: 'reveal' },
+    { id: 'p29', front: 'Wie sieht das Magnetfeld einer Spule aus?', back: 'Wie das eines Stabmagneten: mit Nordpol und Südpol. Außen laufen die Feldlinien vom Nordpol zum Südpol.', mode: 'reveal' }
   ]
 };

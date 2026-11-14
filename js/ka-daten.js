@@ -1,11 +1,11 @@
 /**
  * HIER pro Paket anpassen. Wird von der App UND von den Druckseiten in pdf/ gelesen.
- * Quelle der Themen: Leonies Heft (Mechanik, ab 15.09.2026). Lehrerin: "alles ab Schuljahresbeginn".
+ * Quelle der Themen: Leonies Heft (Mechanik ab 15.09.2026, dazu Elektromagnetismus 1 bis 1.2). Lehrerin: "alles ab Schuljahresbeginn".
  */
 const KA = {
   id: 'physik-mechanik-2627',
   subject: 'Physik',
-  title: 'Physik-Arbeit: Mechanik',
+  title: 'Physik-Arbeit: Mechanik und Elektromagnet',
   date: '2026-11-17',
   topics: [
     { title: 'Kräfte und ihre Wirkung', page: 'Heft 1.1', lessons: [1] },
@@ -16,6 +16,7 @@ const KA = {
     { title: 'Reibung', page: 'Heft 2', lessons: [6, 7] },
     { title: 'Feste und lose Rolle', page: 'Heft 3.1', lessons: [8] },
     { title: 'Flaschenzug', page: 'Heft 3.2', lessons: [9] },
+    { title: 'Elektromagnet und Magnetfeld', page: 'Heft Elektromagnetismus 1', lessons: [10] },
     { title: 'Begriffe und Formeln', page: '', trainer: true }
   ],
   links: [
@@ -28,7 +29,7 @@ const KA = {
 };
 
 // Überschriften der Lektionsgruppen in der Seitenleiste
-const MODULES = { kraft: '1 · Kraft und Masse', reibung: '2 · Reibung', rollen: '3 · Rollen und Flaschenzug' };
+const MODULES = { kraft: '1 · Kraft und Masse', reibung: '2 · Reibung', rollen: '3 · Rollen und Flaschenzug', em: '4 · Elektromagnetismus' };
 
 const LESSONS = [
   { id: 1, title: 'Woran erkennt man eine Kraft?', module: 'kraft' },
@@ -39,5 +40,6 @@ const LESSONS = [
   { id: 6, title: 'Haft-, Gleit- und Rollreibung', module: 'reibung' },
   { id: 7, title: 'Wovon hängt Reibung ab?', module: 'reibung' },
   { id: 8, title: 'Feste und lose Rolle', module: 'rollen' },
-  { id: 9, title: 'Der Flaschenzug', module: 'rollen' }
+  { id: 9, title: 'Der Flaschenzug', module: 'rollen' },
+  { id: 10, title: 'Der Elektromagnet', module: 'em' }
 ];

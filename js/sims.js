@@ -389,6 +389,107 @@ const Sims = {
     return s + '</svg>';
   },
 
+  // ---------- L10: Feldlinien Stabmagnet / Spule (statisches Bild) ----------
+  // typ 'stab' oder 'spule'. Außen laufen die Feldlinien von N nach S, in der Spule von S nach N.
+  feldBild(typ) {
+    const cx = 190, cy = 110, xN = 130, xS = 250, col = '#6B7280';
+    let s = '<svg viewBox="0 0 380 220" class="sim-svg" role="img" aria-label="Feldlinien ' + (typ === 'stab' ? 'eines Stabmagneten' : 'einer Spule') + '">';
+    // Bögen oben und unten: je größer h, desto weiter außen
+    [18, 38, 62, 90].forEach(h => {
+      [-1, 1].forEach(side => {
+        const y0 = cy + side * 6, yc = y0 + side * h * 1.33, d = h * 0.3 + 6;
+        s += '<path d="M' + xN + ',' + y0 + ' C' + (xN - d) + ',' + yc + ' ' + (xS + d) + ',' + yc + ' ' + xS + ',' + y0 + '" fill="none" stroke="' + col + '" stroke-width="1.5"/>';
+        const ya = y0 + side * h; // Scheitel der Bézierkurve (0,75 · 1,33 · h)
+        s += '<polygon points="' + (cx + 6) + ',' + ya + ' ' + (cx - 4) + ',' + (ya - 4) + ' ' + (cx - 4) + ',' + (ya + 4) + '" fill="' + col + '"/>';
+      });
+    });
+    // Feldlinien entlang der Achse: aus dem Nordpol heraus, in den Südpol hinein
+    s += '<line x1="' + (xN - 70) + '" y1="' + cy + '" x2="' + xN + '" y2="' + cy + '" stroke="' + col + '" stroke-width="1.5"/>'
+      + '<polygon points="' + (xN - 50) + ',' + cy + ' ' + (xN - 40) + ',' + (cy - 4) + ' ' + (xN - 40) + ',' + (cy + 4) + '" fill="' + col + '"/>';
+    s += '<line x1="' + xS + '" y1="' + cy + '" x2="' + (xS + 70) + '" y2="' + cy + '" stroke="' + col + '" stroke-width="1.5"/>'
+      + '<polygon points="' + (xS + 40) + ',' + cy + ' ' + (xS + 50) + ',' + (cy - 4) + ' ' + (xS + 50) + ',' + (cy + 4) + '" fill="' + col + '"/>';
+    if (typ === 'stab') {
+      s += '<rect x="' + xN + '" y="' + (cy - 12) + '" width="60" height="24" fill="#FCA5A5" stroke="#374151"/>';
+      s += '<rect x="' + cx + '" y="' + (cy - 12) + '" width="60" height="24" fill="#E5E7EB" stroke="#374151"/>';
+    } else {
+      // Feldlinien im Inneren: gerade, von S nach N (nach links)
+      [-6, 0, 6].forEach(dy => {
+        s += '<line x1="' + (xN - 6) + '" y1="' + (cy + dy) + '" x2="' + (xS + 6) + '" y2="' + (cy + dy) + '" stroke="' + col + '" stroke-width="1.5"/>';
+      });
+      s += '<polygon points="' + (cx - 26) + ',' + cy + ' ' + (cx - 16) + ',' + (cy - 4) + ' ' + (cx - 16) + ',' + (cy + 4) + '" fill="' + col + '"/>';
+      // Windungen
+      for (let i = 0; i < 7; i++) {
+        const x = xN + 6 + i * 18;
+        s += '<ellipse cx="' + x + '" cy="' + cy + '" rx="7" ry="20" fill="none" stroke="#B45309" stroke-width="3"/>';
+      }
+      s += '<line x1="' + (xN - 1) + '" y1="' + (cy + 20) + '" x2="' + (xN - 1) + '" y2="200" stroke="#B45309" stroke-width="3"/>';
+      s += '<line x1="' + (xN + 115) + '" y1="' + (cy + 20) + '" x2="' + (xN + 115) + '" y2="200" stroke="#B45309" stroke-width="3"/>';
+    }
+    s += this.text(xN - 16, cy - 8, 'N', { bold: true, size: 15, color: '#DC2626', anchor: 'middle' });
+    s += this.text(xS + 16, cy - 8, 'S', { bold: true, size: 15, color: '#1F2937', anchor: 'middle' });
+    return s + '</svg>';
+  },
+  magnetfeld(el) {
+    el.innerHTML = '<div class="sim-title">Vergleiche: Stabmagnet und Spule</div>'
+      + this.toggle('typ', [['stab', 'Stabmagnet'], ['spule', 'Spule mit Strom']], 'stab')
+      + '<div class="sim-bild"></div><div class="sim-out"></div>';
+    const bild = el.querySelector('.sim-bild'), out = el.querySelector('.sim-out');
+    const show = typ => {
+      bild.innerHTML = this.feldBild(typ);
+      out.innerHTML = typ === 'stab'
+        ? 'Außen laufen die Feldlinien vom <strong>Nordpol</strong> zum <strong>Südpol</strong>. An den Polen liegen sie am dichtesten: Dort ist das Magnetfeld am stärksten.'
+        : 'Die Spule hat <strong>dasselbe Feldlinienbild</strong> wie der Stabmagnet: einen Nordpol und einen Südpol. Im Inneren laufen die Feldlinien gerade.';
+      el.querySelectorAll('.sim-btn').forEach(b => b.classList.toggle('on', b.dataset.typ === typ));
+    };
+    el.querySelectorAll('.sim-btn').forEach(b => b.addEventListener('click', () => show(b.dataset.typ)));
+    show('stab');
+  },
+
+  // ---------- L10: Elektromagnet verstärken (Büroklammern anheben) ----------
+  elektromagnet(el) {
+    const id = 'em' + Math.random().toString(36).slice(2, 6);
+    el.innerHTML = '<div class="sim-title">Probier es aus: Wie viele Büroklammern hält der Elektromagnet?</div>'
+      + this.slider(id + 'W', 'Windungen', 50, 400, 50, 100, '')
+      + this.slider(id + 'I', 'Stromstärke', 0, 2, 0.5, 1, 'A')
+      + this.toggle('kern', [['ohne', 'ohne Eisenkern'], ['mit', 'mit Eisenkern']], 'ohne')
+      + '<svg viewBox="0 0 380 230" class="sim-svg" role="img" aria-label="Elektromagnet mit Büroklammern"></svg><div class="sim-out"></div>';
+    const svg = el.querySelector('svg'), out = el.querySelector('.sim-out');
+    let kern = 'ohne';
+    const update = () => {
+      const W = this.val(el, id + 'W'), I = this.val(el, id + 'I');
+      // vereinfachtes Modell: Stärke wächst mit Windungen und Stromstärke, Eisenkern verdreifacht sie
+      const n = Math.min(24, Math.floor(W * I / 100) * (kern === 'mit' ? 3 : 1));
+      let s = '';
+      if (kern === 'mit') s += '<rect x="100" y="34" width="180" height="20" fill="#9CA3AF" stroke="#374151"/>' + this.text(190, 22, 'Eisenkern', { anchor: 'middle', size: 11, color: '#374151' });
+      const loops = W / 25; // 2 bis 16 Schleifen im Bild
+      for (let i = 0; i < loops; i++) {
+        const x = 110 + i * 160 / (loops - 1);
+        s += '<ellipse cx="' + x + '" cy="44" rx="6" ry="18" fill="none" stroke="#B45309" stroke-width="3"/>';
+      }
+      s += '<line x1="104" y1="44" x2="40" y2="44" stroke="#B45309" stroke-width="2"/><line x1="276" y1="44" x2="340" y2="44" stroke="#B45309" stroke-width="2"/>';
+      s += this.text(40, 36, '+', { bold: true, size: 15, color: '#DC2626' }) + this.text(334, 36, '−', { bold: true, size: 15 });
+      if (I === 0) s += this.text(190, 140, 'Strom aus: kein Magnetfeld', { anchor: 'middle', size: 14, color: '#6B7280' });
+      // Büroklammern in Spalten zu je 6
+      for (let k = 0; k < n; k++) {
+        const cols = Math.ceil(n / 6), col = Math.floor(k / 6), row = k % 6;
+        const x = 184 - (cols - 1) * 20 + col * 40, y = 70 + row * 26;
+        s += '<rect x="' + x + '" y="' + y + '" width="12" height="22" rx="5" fill="none" stroke="#2563EB" stroke-width="2"/>'
+          + '<rect x="' + (x + 3) + '" y="' + (y + 4) + '" width="6" height="14" rx="3" fill="none" stroke="#2563EB" stroke-width="1.5"/>';
+      }
+      svg.innerHTML = s;
+      out.innerHTML = I === 0
+        ? 'Ohne Strom ist die Spule <strong>kein Magnet</strong>. Alle Klammern fallen ab.'
+        : n === 0 ? 'Das Magnetfeld ist noch <strong>zu schwach</strong> für eine Büroklammer. Mach den Elektromagneten stärker!'
+        : 'Der Elektromagnet hält <strong>' + n + (n === 1 ? ' Büroklammer' : ' Büroklammern') + '</strong>. Mehr Windungen, mehr Strom und ein Eisenkern machen ihn stärker. <span class="klein">(vereinfachtes Modell)</span>';
+    };
+    el.querySelectorAll('.sim-btn').forEach(b => b.addEventListener('click', () => {
+      kern = b.dataset.kern;
+      el.querySelectorAll('.sim-btn').forEach(x => x.classList.toggle('on', x === b));
+      update();
+    }));
+    this.bind(el, [id + 'W', id + 'I'], update);
+  },
+
   // ---------- Bild für Übungen: Flaschenzug mit n tragenden Seilstücken ----------
   flaschenBild(n) {
     let s = '<svg viewBox="0 0 220 190" class="sim-svg sim-mini" role="img" aria-label="Skizze eines Flaschenzugs">';
